@@ -10,9 +10,9 @@ from collections import OrderedDict
 class LruCache(object):
     """ LRU cache implemention as decorator """
 
-    def __init__(self, max_size=100):
+    def __init__(self, maxSize=100):
         self.cache = OrderedDict()
-        self.max_size = max_size
+        self.maxSize = maxSize
         self.lock = RLock()  # because updates aren't threadsafe
 
     def clearCache(self):
@@ -36,7 +36,7 @@ class LruCache(object):
 
             # pop item from dictionary if it's full
             with self.lock:
-                if len(self.cache) == self.max_size:
+                if len(self.cache) == self.maxSize:
                     self.cache.popitem(last=False)
 
             with self.lock:
@@ -45,6 +45,6 @@ class LruCache(object):
                 return value
 
         wrapper.cache = self.cache
-        wrapper.max_size = self.max_size
-        wrapper.cache_clean = self.clearCache
+        wrapper.maxSize = self.maxSize
+        wrapper.clearCache = self.clearCache
         return wrapper

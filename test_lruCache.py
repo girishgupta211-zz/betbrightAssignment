@@ -5,7 +5,7 @@ from lruCache import LruCache
 
 class TestLRUCache(unittest.TestCase):
     def testLru(self):
-        @LruCache(max_size=2)
+        @LruCache(maxSize=2)
         def square(x):
             return x * x
 
@@ -15,7 +15,7 @@ class TestLRUCache(unittest.TestCase):
         self.assertIn(9, [v for v in square.cache.values()])
         self.assertIn(16, [v for v in square.cache.values()])
         self.assertNotIn(4, [v for v in square.cache.values()])
-        square.cache_clean()
+        square.clearCache()
         self.assertEqual(0, len(square.cache))
 
 
