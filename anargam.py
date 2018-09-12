@@ -19,8 +19,8 @@ def getAnagrams(word, words_list):
     input list/tuple of string"""
     # Remove spaces and convert to lower case
     try:
+        l_word = word.replace(' ', '').lower()
         return [each for each in words_list if
-                isAnagram(each.replace(' ', '').lower(),
-                          word.replace(' ', '').lower())]
+                isAnagram(each.replace(' ', '').lower(), l_word)]
     except AttributeError as ex:
         return "input data format is wrong"
