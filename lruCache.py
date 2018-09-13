@@ -3,8 +3,8 @@ Implement a least recently used (LRU) cache mechanism using a decorator
 and demonstrate it use in a small script. The LRU must be able to admit
  a max_size parameter that by default has to be 100.
 """
-from _thread import RLock
 from collections import OrderedDict
+from threading import RLock
 
 
 class LruCache(object):
