@@ -25,20 +25,25 @@ class LruCache(object):
                             for key in sorted(kwargs.keys()))
             key = (args, kwtuple)
 
-            # Check if key already exits then update the value
-            # and put key in beginning
-            with self.lock:
-                if key in args:
+            # Here I am using 3 different locks for update, insert and delete
+
+            # Check if key already exits then delete the item and
+            # add it back at the end of dictionary(make it most recently used)
+            if key in self.cache:
+                with self.lock:
                     value = self.cache[key]
                     del self.cache[key]
                     self.cache[key] = value
                     return value
 
-            # pop item from dictionary if it's full
-            with self.lock:
-                if len(self.cache) == self.maxSize:
+            # when cache is full, pop item from front of dictionary
+            # as this is least recently used
+            if len(self.cache) == self.maxSize:
+                with self.lock:
                     self.cache.popitem(last=False)
 
+            # if key does not exist in the system then insert it at the end
+            #  of dictionary(most recent used items will go in the end)
             with self.lock:
                 value = func(*args, **kwargs)
                 self.cache[key] = value
