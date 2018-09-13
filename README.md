@@ -1,4 +1,4 @@
-# betbrightAssignment
+# Betbright Assignment
 
 The Python developer test consists of 3 questions. Please use Python 2.7 when completing the
 questions.
