@@ -8,14 +8,13 @@ import datetime
 # valid draw date based on an optional supplied date
 # time parameter. If no supplied date is provided, assume current date time
 
-def nextLotteryDate(inputDate=None):
-    """ Calculate and return the next valid Irish Lotto draw date.
+def nextDrawDate(inputDate=None):
+    """ Calculate and return the next valid Irish lottery draw date.
            input_date = datetime object (optional, default value is current
            date/time)
     """
 
     # 0 = Monday, 1 = Tuesday, 2 = Wednesday, .... 6 = Sunday
-
     wednesday = 2
     saturday = 5
     if inputDate is None:

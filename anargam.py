@@ -7,8 +7,8 @@ from collections import Counter
 # inside the given words list.
 
 def isAnagram(string1, string2):
-    return Counter(string1) == Counter(string2) if len(string1) == len(
-        string2) else False
+    return Counter(string1) == Counter(string2) \
+        if len(string1) == len(string2) else False
     # builtin function Counter is better than sorted as it will
     # reduce complexity to O(n)
     # return sorted(string1) == sorted(string2)

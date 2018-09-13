@@ -19,7 +19,7 @@ class TestAnagrams(unittest.TestCase):
         self.assertEqual(getAnagrams('Edward Gorey', inputList),
                          expectedOutput)
 
-    def testNegative(self):
+    def testNegativeWithList(self):
         self.assertNotEqual(getAnagrams('abc', ['abc', 'cba', 'ba']), ['ba'])
 
     def testIsAnagramPositive(self):

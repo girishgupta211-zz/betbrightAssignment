@@ -8,12 +8,16 @@ from collections import OrderedDict
 
 
 class LruCache(object):
-    """ LRU cache implemention as decorator """
+    """ LRU cache implementation as decorator """
 
     def __init__(self, maxSize=100):
+        # I am taking OrderedDict as this keeps order of keys.
+        # It will keep on adding new keys(most recent)
+        # in dictionary at the end.
+        # Least recent keys will always be on the front
         self.cache = OrderedDict()
         self.maxSize = maxSize
-        self.lock = RLock()  # because updates aren't threadsafe
+        self.lock = RLock()  # because updates aren't thread safe
 
     def clearCache(self):
         with self.lock:
@@ -27,6 +31,7 @@ class LruCache(object):
 
             # Here I am using 3 different locks for update, insert and delete
 
+            # UPDATE ##
             # Check if key already exits then delete the item and
             # add it back at the end of dictionary(make it most recently used)
             if key in self.cache:
@@ -36,12 +41,14 @@ class LruCache(object):
                     self.cache[key] = value
                     return value
 
+            # DELETE ##
             # when cache is full, pop item from front of dictionary
             # as this is least recently used
             if len(self.cache) == self.maxSize:
                 with self.lock:
                     self.cache.popitem(last=False)
 
+            # INSERT ##
             # if key does not exist in the system then insert it at the end
             #  of dictionary(most recent used items will go in the end)
             with self.lock:
