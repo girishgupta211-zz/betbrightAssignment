@@ -14,13 +14,13 @@ def isAnagram(string1, string2):
     # return sorted(string1) == sorted(string2)
 
 
-def getAnagrams(word, words_list):
+def getAnagrams(word, wordsList):
     """ Returns the list of valid anagrams for given word from
     input list/tuple of string"""
     # Remove spaces and convert to lower case
     try:
-        l_word = word.replace(' ', '').lower()
-        return [each for each in words_list if
-                isAnagram(each.replace(' ', '').lower(), l_word)]
+        lWord = word.replace(' ', '').lower()
+        return [each for each in wordsList if
+                isAnagram(each.replace(' ', '').lower(), lWord)]
     except AttributeError as ex:
         return "input data format is wrong"
